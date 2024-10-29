@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>indi.tt</groupId>
+        <artifactId>yu-rpc</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>indi.tt</groupId>
-    <artifactId>yu-rpc</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <packaging>pom</packaging>
-    <modules>
-        <module>yu-rpc-core</module>
-        <module>example-consumer</module>
-        <module>example-common</module>
-        <module>example-provider</module>
-    </modules>
+    <artifactId>example-common</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
