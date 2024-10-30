@@ -39,7 +39,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
             byte[] bytes = body.getBytes();
             RpcRequest rpcRequest = null;
             try {
-                serializer.deserialize(bytes, RpcRequest.class);
+                rpcRequest = serializer.deserialize(bytes, RpcRequest.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }

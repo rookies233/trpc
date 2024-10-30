@@ -2,6 +2,7 @@ package indi.tt.example.consumer;
 
 import indi.tt.example.common.model.User;
 import indi.tt.example.common.service.UserService;
+import indi.tt.yurpc.proxy.ServiceProxyFactory;
 
 /**
  * 简易服务消费者示例
@@ -9,9 +10,9 @@ import indi.tt.example.common.service.UserService;
 public class EasyConsumerExample {
     public static void main(String[] args) {
         // 静态代理
-        UserService userService = new UserServiceProxy();
+        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
-        user.setName("tt");
+        user.setName("yupi");
         // 调用
         User newUser = userService.getUser(user);
         if (newUser != null) {
