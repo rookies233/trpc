@@ -1,4 +1,4 @@
-package indi.tt.example;
+package indi.tt.example.consumer;
 
 import indi.tt.yurpc.config.RpcConfig;
 import indi.tt.yurpc.utils.ConfigUtils;

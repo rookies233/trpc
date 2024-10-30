@@ -1,4 +1,4 @@
-package indi.tt.example;
+package indi.tt.example.consumer;
 
 import indi.tt.example.common.model.User;
 import indi.tt.example.common.service.UserService;
@@ -8,8 +8,8 @@ import indi.tt.example.common.service.UserService;
  */
 public class EasyConsumerExample {
     public static void main(String[] args) {
-        // TODO 需要获取 UserService 的实现类对象
-        UserService userService = null;
+        // 静态代理
+        UserService userService = new UserServiceProxy();
         User user = new User();
         user.setName("tt");
         // 调用
