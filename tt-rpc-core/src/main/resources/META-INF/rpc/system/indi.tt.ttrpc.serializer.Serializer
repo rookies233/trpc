@@ -1,0 +1,4 @@
+jdk=indi.tt.ttrpc.serializer.JdkSerializer
+hessian=indi.tt.ttrpc.serializer.HessianSerializer
+json=indi.tt.ttrpc.serializer.JsonSerializer
+kryo=indi.tt.ttrpc.serializer.KryoSerializer

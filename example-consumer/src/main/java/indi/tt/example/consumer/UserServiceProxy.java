@@ -4,10 +4,10 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import indi.tt.example.common.model.User;
 import indi.tt.example.common.service.UserService;
-import indi.tt.yurpc.model.RpcRequest;
-import indi.tt.yurpc.model.RpcResponse;
-import indi.tt.yurpc.serializer.JdkSerializer;
-import indi.tt.yurpc.serializer.Serializer;
+import indi.tt.ttrpc.model.RpcRequest;
+import indi.tt.ttrpc.model.RpcResponse;
+import indi.tt.ttrpc.serializer.JdkSerializer;
+import indi.tt.ttrpc.serializer.Serializer;
 
 import java.io.IOException;
 
