@@ -1,7 +1,10 @@
 package indi.tt.ttrpc;
 
+import indi.tt.ttrpc.config.RegistryConfig;
 import indi.tt.ttrpc.config.RpcConfig;
 import indi.tt.ttrpc.constant.RpcConstant;
+import indi.tt.ttrpc.registry.Registry;
+import indi.tt.ttrpc.registry.RegistryFactory;
 import indi.tt.ttrpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +25,11 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("rpc init, config = {}", newRpcConfig.toString());
+        // 注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init, config = {}", registryConfig);
     }
 
     /**

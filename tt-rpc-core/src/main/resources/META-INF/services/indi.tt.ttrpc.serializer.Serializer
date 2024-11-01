@@ -1,0 +1,4 @@
+indi.tt.ttrpc.serializer.JdkSerializer
+indi.tt.ttrpc.serializer.HessianSerializer
+indi.tt.ttrpc.serializer.JsonSerializer
+indi.tt.ttrpc.serializer.KryoSerializer

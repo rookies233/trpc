@@ -86,6 +86,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.etcd/jetcd-core -->
+        <dependency>
+            <groupId>io.etcd</groupId>
+            <artifactId>jetcd-core</artifactId>
+            <version>0.7.7</version>
+        </dependency>
     </dependencies>
 
 </project>
