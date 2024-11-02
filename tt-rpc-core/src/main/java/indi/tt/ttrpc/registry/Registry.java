@@ -3,7 +3,9 @@ package indi.tt.ttrpc.registry;
 import indi.tt.ttrpc.config.RegistryConfig;
 import indi.tt.ttrpc.model.ServiceMetaInfo;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 注册中心
@@ -45,4 +47,16 @@ public interface Registry {
      * 服务销毁
      */
     void destroy();
+
+    /**
+     * 心跳检测（服务端）
+     */
+    void heartBeat();
+
+    /**
+     * 监听（消费端）
+     *
+     * @param serviceNodeKey
+     */
+    void watch(String serviceNodeKey);
 }

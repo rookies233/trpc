@@ -19,12 +19,23 @@ public class EasyConsumerExample {
         UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
         user.setName("tt");
+
         // 调用
-        User newUser = userService.getUser(user);
-        if (newUser != null) {
-            System.out.println(newUser.getName());
-        } else {
-            System.out.println("user == null");
+//        User newUser = userService.getUser(user);
+//        if (newUser != null) {
+//            System.out.println(newUser.getName());
+//        } else {
+//            System.out.println("user == null");
+//        }
+
+        // 连续调用服务 3 次
+        for (int i = 0; i < 3; ++i) {
+            User newUser = userService.getUser(user);
+            if (newUser != null) {
+                System.out.println(newUser.getName());
+            } else {
+                System.out.println("user == null");
+            }
         }
 //        long number = userService.getNumber();
 //        System.out.println(number);
