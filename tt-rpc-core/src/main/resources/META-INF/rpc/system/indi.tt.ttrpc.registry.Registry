@@ -1,1 +1,2 @@
 etcd=indi.tt.ttrpc.registry.EtcdRegistry
+zookeeper=indi.tt.ttrpc.registry.ZooKeeperRegistry
