@@ -20,5 +20,5 @@ public interface ProtocolConstant {
     /**
      * 协议版本号
      */
-    byte MESSAGE_TYPE_REQUEST = 0x1;
+    byte PROTOCOL_VERSION = 0x1;
 }
