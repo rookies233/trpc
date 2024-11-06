@@ -10,6 +10,9 @@ import indi.tt.ttrpc.registry.Registry;
 import indi.tt.ttrpc.registry.RegistryFactory;
 import indi.tt.ttrpc.server.HttpServer;
 import indi.tt.ttrpc.server.VertxHttpServer;
+import indi.tt.ttrpc.server.tcp.VertxTcpClient;
+import indi.tt.ttrpc.server.tcp.VertxTcpServer;
+import io.vertx.core.Vertx;
 
 /**
  * 简易服务提供者示例
@@ -40,7 +43,11 @@ public class EasyProviderExample {
         }
 
         // 启动 Web 服务
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+//        HttpServer httpServer = new VertxHttpServer();
+//        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+
+        // 启动 TCP 服务
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
     }
 }

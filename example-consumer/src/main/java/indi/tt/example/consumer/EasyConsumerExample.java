@@ -5,12 +5,14 @@ import indi.tt.example.common.service.UserService;
 import indi.tt.ttrpc.config.RpcConfig;
 import indi.tt.ttrpc.proxy.ServiceProxyFactory;
 import indi.tt.ttrpc.utils.ConfigUtils;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 简易服务消费者示例
  *
  * @author tt
  */
+@Slf4j
 public class EasyConsumerExample {
     public static void main(String[] args) {
         RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
@@ -24,8 +26,10 @@ public class EasyConsumerExample {
         User newUser = userService.getUser(user);
         if (newUser != null) {
             System.out.println(newUser.getName());
+//            log.info("newUser.getName() = {}", newUser.getName());
         } else {
             System.out.println("user == null");
+//            log.info("user == null");
         }
 
         // 连续调用服务 3 次

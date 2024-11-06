@@ -3,6 +3,7 @@ package indi.tt.ttrpc.server.tcp;
 import indi.tt.ttrpc.model.RpcRequest;
 import indi.tt.ttrpc.model.RpcResponse;
 import indi.tt.ttrpc.protocol.ProtocolMessage;
+import indi.tt.ttrpc.protocol.ProtocolMessageDecoder;
 import indi.tt.ttrpc.protocol.ProtocolMessageEncoder;
 import indi.tt.ttrpc.protocol.ProtocolMessageTypeEnum;
 import indi.tt.ttrpc.registry.LocalRegistry;
@@ -18,13 +19,12 @@ import java.lang.reflect.Method;
  */
 public class TcpServerHandler implements Handler<NetSocket> {
     @Override
-    public void handle(NetSocket netSocket) {
-        // 处理连接
-        netSocket.handler(buffer -> {
+    public void handle(NetSocket socket) {
+        TcpBufferHandlerWrapper bufferHandler = new TcpBufferHandlerWrapper(buffer -> {
             // 接受请求，解码
-            ProtocolMessage<RpcRequest>  protocolMessage;
+            ProtocolMessage<RpcRequest> protocolMessage;
             try {
-                protocolMessage = (ProtocolMessage<RpcRequest>) ProtocolMessage.decode(buffer.getBytes());
+                protocolMessage = (ProtocolMessage<RpcRequest>) ProtocolMessageDecoder.decode(buffer);
             } catch (IOException e) {
                 throw new RuntimeException("消息解码错误");
             }
@@ -54,10 +54,11 @@ public class TcpServerHandler implements Handler<NetSocket> {
             ProtocolMessage<RpcResponse> responseProtocolMessage = new ProtocolMessage<>(header, rpcResponse);
             try {
                 Buffer encode = ProtocolMessageEncoder.encode(responseProtocolMessage);
-                netSocket.write(encode);
+                socket.write(encode);
             } catch (IOException e) {
                 throw new RuntimeException("协议消息编码错误");
             }
         });
+        socket.handler(bufferHandler);
     }
 }
