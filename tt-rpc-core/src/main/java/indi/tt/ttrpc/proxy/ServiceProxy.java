@@ -7,6 +7,11 @@ import cn.hutool.http.HttpResponse;
 import indi.tt.ttrpc.RpcApplication;
 import indi.tt.ttrpc.config.RpcConfig;
 import indi.tt.ttrpc.constant.RpcConstant;
+import indi.tt.ttrpc.fault.retry.RetryStrategy;
+import indi.tt.ttrpc.fault.retry.RetryStrategyFactory;
+import indi.tt.ttrpc.fault.retry.RetryStrategyKeys;
+import indi.tt.ttrpc.loadbalancer.LoadBalancer;
+import indi.tt.ttrpc.loadbalancer.LoadBalancerFactory;
 import indi.tt.ttrpc.model.RpcRequest;
 import indi.tt.ttrpc.model.RpcResponse;
 import indi.tt.ttrpc.model.ServiceMetaInfo;
@@ -25,7 +30,9 @@ import io.vertx.core.net.NetSocket;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.CompletableFuture;
 
@@ -61,10 +68,20 @@ public class ServiceProxy implements InvocationHandler {
             if (CollUtil.isEmpty(serviceMetaInfoList)) {
                 throw new RuntimeException("暂无服务地址");
             }
-            ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
 
-            // 发送 TCP 请求
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            // 负载均衡
+            LoadBalancer loadBalancer = LoadBalancerFactory.getInstance(rpcConfig.getLoadBalancer());
+            // 将调用方法名（请求路径）作为负载均衡参数
+            Map<String, Object> requestParams = new HashMap<>();
+            requestParams.put("methodName", rpcRequest.getMethodName());
+            ServiceMetaInfo selectedServiceMetaInfo = loadBalancer.select(requestParams, serviceMetaInfoList);
+
+            // 使用重试机制
+            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+            // TODO 不理解 lambda 表达式，为什么不用 return
+            RpcResponse rpcResponse = retryStrategy.doRetry(() ->
+                    VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+            );
             return rpcResponse.getData();
         } catch (Exception e) {
             throw new RuntimeException("调用失败");

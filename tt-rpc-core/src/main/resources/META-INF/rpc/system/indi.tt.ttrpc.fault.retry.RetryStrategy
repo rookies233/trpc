@@ -1,0 +1,2 @@
+no=indi.tt.ttrpc.fault.retry.NoRetryStrategy
+fixedInterval=indi.tt.ttrpc.fault.retry.FixedIntervalRetryStrategy

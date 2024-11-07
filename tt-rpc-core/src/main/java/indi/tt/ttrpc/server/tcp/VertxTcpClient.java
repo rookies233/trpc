@@ -57,6 +57,11 @@ public class VertxTcpClient {
                 result -> {
                     if (!result.succeeded()) {
                         System.err.println("Failed to connect to TCP server");
+                        /*
+                        重试策略依赖于捕获异常来触发重试，所以在测试时，代码仅仅只是打印了错误信息而没有抛出异常，所以重试策略是失效的。
+                        所以解决方案是在连接失败时抛出异常，让重试策略捕获到它并触发重试。
+                         */
+                        responseFuture.completeExceptionally(new RuntimeException("Failed to connect to TCP server"));
                         return;
                     }
                     NetSocket socket = result.result();

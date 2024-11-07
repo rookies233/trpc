@@ -1,0 +1,3 @@
+roundRobin=indi.tt.ttrpc.loadbalancer.RoundRobinLoadBalancer
+random=indi.tt.ttrpc.loadbalancer.RandomLoadBalancer
+consistentHash=indi.tt.ttrpc.loadbalancer.ConsistentHashLoadBalancer
