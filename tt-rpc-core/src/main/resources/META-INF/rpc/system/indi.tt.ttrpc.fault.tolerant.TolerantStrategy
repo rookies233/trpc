@@ -1,0 +1,4 @@
+failBack=indi.tt.ttrpc.fault.tolerant.FailBackTolerantStrategy
+failFast=indi.tt.ttrpc.fault.tolerant.FailFastTolerantStrategy
+failOver=indi.tt.ttrpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=indi.tt.ttrpc.fault.tolerant.FailSafeTolerantStrategy

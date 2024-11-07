@@ -1,6 +1,7 @@
 package indi.tt.ttrpc.config;
 
 import indi.tt.ttrpc.fault.retry.RetryStrategyKeys;
+import indi.tt.ttrpc.fault.tolerant.TolerantStrategyKeys;
 import indi.tt.ttrpc.loadbalancer.LoadBalancerKeys;
 import indi.tt.ttrpc.serializer.SerializerKeys;
 import lombok.Data;
@@ -57,4 +58,9 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 }
