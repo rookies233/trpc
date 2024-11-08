@@ -11,9 +11,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>tt-rpc-core</module>
+        <module>tt-rpc-spring-boot-starter</module>
         <module>example-consumer</module>
         <module>example-common</module>
         <module>example-provider</module>
+        <module>example-springboot-consumer</module>
+        <module>example-springboot-provider</module>
     </modules>
 
     <properties>
