@@ -26,6 +26,7 @@ public class ProtocolMessage<T> {
 
     /**
      * 协议消息头
+     * TODO 为什么这个消息头要写成内部类？
      */
     @Data
     public static class Header {
