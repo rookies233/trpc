@@ -1,4 +1,4 @@
-# tRPC 高性能 RPC 框架
+# tRPC - 高性能 RPC 框架
 
 ## 简介
 
